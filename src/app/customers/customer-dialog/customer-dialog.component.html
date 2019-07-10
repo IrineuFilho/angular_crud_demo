@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>{{ actionName() }} Customer</h1>
+<div mat-dialog-content>
+  <p>{{ data | json }}</p>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button (click)="saveCustomer()">{{actionButton()}}</button>
+</div>
