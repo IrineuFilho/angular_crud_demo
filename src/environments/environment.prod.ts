@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl: 'https://tidy-api-test.herokuapp.com:443'
 };
