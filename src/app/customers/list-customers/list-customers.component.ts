@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Customer} from '../../shared/models/customer';
 import {CustomerService} from '../../services/customer.service';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {CustomerDialogComponent} from '../customer-dialog/customer-dialog.component';
-import {ConfirmationDialogComponent} from '../../shared/confirmation-dialog/confirmation-dialog.component';
+import {LoaderService} from '../../loader.service';
 
 @Component({
   selector: 'app-list-customers',
@@ -15,34 +15,32 @@ export class ListCustomersComponent implements OnInit {
   public customers: Customer[];
   public displayedColumns: string[] = ['id', 'name', 'email', 'fullAddress', 'actions'];
 
-  constructor(private customerService: CustomerService, public dialog: MatDialog) {
+  constructor(private customerService: CustomerService,
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar,
+              private loaderService: LoaderService
+  ) {
   }
 
   ngOnInit() {
-    this.customerService.allCustomers().subscribe((customers) => {
-      this.customers = customers;
-    });
+    this.loadList();
   }
 
-  openCustomerDialog(customer): void {
-    const dialogRef = this.dialog.open(CustomerDialogComponent, {
-      data: {customer}
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
-    });
+  loadList() {
+    this.loaderService.show();
+    this.customerService
+      .allCustomers()
+      .subscribe((customers) => {
+        this.loaderService.hide();
+        this.customers = customers;
+      }, (err) => {
+        this.loaderService.hide();
+        this.snackBar.open('An error occurred when trying to load customers list',
+          null,
+          {
+            panelClass: ['custom-snackbar', '--error'],
+          });
+      });
   }
-
-  deleteCustomer(customer): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {title: `Do you want to remove customer '${customer.name}'?`, message: 'This action can\'t be undone!'}
-    });
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res.result) {
-      //  delete
-      }
-    });
-  }
-
 }
+

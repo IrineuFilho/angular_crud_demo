@@ -5,13 +5,18 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatDialogModule,
+  MatFormFieldModule,
   MatIconModule,
-  MatTableModule
+  MatInputModule,
+  MatSnackBarModule,
+  MatTableModule,
 } from '@angular/material';
 
 import {NotFoundComponent} from './not-found/not-found.component';
 import {HttpClientModule} from '@angular/common/http';
-import {ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
+import {LoaderComponent} from './loader/loader.component';
+import {NgxLoadingModule} from 'ngx-loading';
 
 const modules = [
   CommonModule,
@@ -19,13 +24,18 @@ const modules = [
   BrowserAnimationsModule,
   MatButtonModule,
   MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
   MatIconModule,
-  MatTableModule];
+  MatSnackBarModule,
+  MatTableModule,
+  NgxLoadingModule
+];
 
 @NgModule({
-  declarations: [NotFoundComponent, ConfirmationDialogComponent],
+  declarations: [NotFoundComponent, ConfirmationDialogComponent, LoaderComponent],
   imports: [...modules],
-  exports: [...modules, NotFoundComponent],
+  exports: [...modules, NotFoundComponent, LoaderComponent],
   entryComponents: [ConfirmationDialogComponent]
 })
 export class SharedModule {

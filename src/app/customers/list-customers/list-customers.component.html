@@ -8,10 +8,7 @@
   </div>
   <div class="flex-spacer"></div>
   <div class="actions">
-    <button mat-button (click)="openCustomerDialog()">
-      <mat-icon aria-hidden="false" aria-label="add-new-person">add_circle</mat-icon>
-      Add
-    </button>
+    <app-create-customer (loadList)="loadList()"></app-create-customer>
   </div>
 </div>
 
@@ -44,12 +41,8 @@
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <button mat-icon-button (click)="openCustomerDialog(element)">
-        <mat-icon aria-hidden="false" aria-label="edit-new-person">edit</mat-icon>
-      </button>
-      <button mat-icon-button (click)="deleteCustomer(element)">
-        <mat-icon aria-hidden="false" aria-label="delete-new-person">delete</mat-icon>
-      </button>
+      <app-update-customer [customer]="element" (loadList)="loadList()"></app-update-customer>
+      <app-destroy-customer [customer]="element" (loadList)="loadList()"></app-destroy-customer>
     </mat-cell>
   </ng-container>
 
