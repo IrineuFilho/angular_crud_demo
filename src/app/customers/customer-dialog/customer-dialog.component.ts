@@ -36,6 +36,10 @@ export class CustomerDialogComponent implements OnInit {
     }
   }
 
+  mask(zipcode) {
+    return zipcode.length < 6 ? '000009' : '00000-0000';
+  }
+
   closeDialog() {
     this.dialogRef.close();
   }

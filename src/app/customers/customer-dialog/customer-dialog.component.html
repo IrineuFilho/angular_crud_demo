@@ -42,8 +42,11 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="zipcode" placeholder="ZipCode">
+        <input matInput formControlName="zipcode" placeholder="ZipCode" [mask]="mask(customerForm.get('zipcode').value)">
         <mat-error *ngIf="checkFieldRequired('zipcode')">Zipcode is required</mat-error>
+        <mat-error *ngIf="customerForm.get('zipcode').hasError('Mask error') && customerForm.get('zipcode').touched ">
+          Zipcode is invalid
+        </mat-error>
       </mat-form-field>
 
     </div>
@@ -54,5 +57,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="closeDialog()">Cancel</button>
-  <button mat-button (click)="saveCustomer(customerForm.value)" [disabled]="customerForm.invalid">{{actionButton()}}</button>
+  <button mat-button (click)="saveCustomer(customerForm.value)"
+          [disabled]="customerForm.invalid">{{actionButton()}}</button>
 </div>

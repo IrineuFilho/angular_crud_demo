@@ -17,6 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
 import {LoaderComponent} from './loader/loader.component';
 import {NgxLoadingModule} from 'ngx-loading';
+import {NgxMaskModule} from 'ngx-mask';
 
 const modules = [
   CommonModule,
@@ -29,7 +30,8 @@ const modules = [
   MatIconModule,
   MatSnackBarModule,
   MatTableModule,
-  NgxLoadingModule
+  NgxLoadingModule,
+  NgxMaskModule
 ];
 
 @NgModule({

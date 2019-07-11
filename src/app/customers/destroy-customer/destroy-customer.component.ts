@@ -3,7 +3,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 
 import {ConfirmationDialogComponent} from '../../shared/confirmation-dialog/confirmation-dialog.component';
 import {CustomerService} from '../../services/customer.service';
-import {LoaderService} from '../../loader.service';
+import {LoaderService} from '../../services/loader.service';
 
 
 @Component({

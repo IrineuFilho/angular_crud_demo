@@ -6,7 +6,10 @@ import {SharedModule} from './shared/shared.module';
 import {AppComponent} from './app.component';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {NgxLoadingModule} from 'ngx-loading';
-import {LoaderService} from './loader.service';
+import {LoaderService} from './services/loader.service';
+import {IConfig, NgxMaskModule} from 'ngx-mask';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {};
 
 @NgModule({
   declarations: [
@@ -16,7 +19,8 @@ import {LoaderService} from './loader.service';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    NgxMaskModule.forRoot(options)
   ],
   providers: [
     LoaderService,
@@ -26,3 +30,4 @@ import {LoaderService} from './loader.service';
 })
 export class AppModule {
 }
+

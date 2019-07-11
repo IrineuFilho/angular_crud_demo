@@ -3,7 +3,7 @@ import {Customer} from '../../shared/models/customer';
 import {CustomerService} from '../../services/customer.service';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {CustomerDialogComponent} from '../customer-dialog/customer-dialog.component';
-import {LoaderService} from '../../loader.service';
+import {LoaderService} from '../../services/loader.service';
 
 @Component({
   selector: 'app-list-customers',
