@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, Validators} from '@angular/forms';
 import {EmailValidator} from '../../shared/validators/email-validator.directive';
 import {CustomerService} from '../../services/customer.service';
-import {Customer} from '../../shared/models/customer';
+import {LoaderService} from '../../services/loader.service';
 
 @Component({
   selector: 'app-customer-dialog',
@@ -26,7 +26,8 @@ export class CustomerDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any,
               private fb: FormBuilder,
               private customerService: CustomerService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private loader: LoaderService) {
   }
 
   ngOnInit() {
@@ -45,6 +46,7 @@ export class CustomerDialogComponent implements OnInit {
   }
 
   saveCustomer(customerParams) {
+    this.loader.show();
     if (this.isNewCustomer()) {
       this.customerService
         .createCustomer(customerParams)
@@ -53,6 +55,7 @@ export class CustomerDialogComponent implements OnInit {
             this.dialogRef.close({});
           },
           (err) => {
+            this.loader.hide();
             this.onFailSnackBar(err.error);
           });
     } else {
@@ -62,6 +65,7 @@ export class CustomerDialogComponent implements OnInit {
           this.onSuccessSnackBar('Customer was updated with success');
           this.dialogRef.close({});
         }, (err) => {
+          this.loader.hide();
           this.onFailSnackBar(err.error);
         });
 
