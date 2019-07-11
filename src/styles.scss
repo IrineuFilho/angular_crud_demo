@@ -4,3 +4,21 @@
 *{
   font-family: Roboto;
 }
+
+.custom-snackbar{
+  text-align: center;
+  color: #fff;
+
+  .mat-simple-snackbar{
+    justify-content: center !important;
+  }
+
+  &.--success{
+    background-color: #2196f3!important;
+  }
+
+  &.--error{
+    background-color: rgba(246, 33, 0, 0.76) !important;
+  }
+
+}
