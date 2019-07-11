@@ -1,9 +1,58 @@
 <h1 mat-dialog-title>{{ actionName() }} Customer</h1>
 <div mat-dialog-content>
-  <p>{{ data | json }}</p>
+
+  <form [formGroup]="customerForm" class="customer-form">
+
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput formControlName="name" placeholder="Name">
+        <mat-error *ngIf="checkFieldRequired('name')">Name is required</mat-error>
+
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput formControlName="email" placeholder="E-mail">
+        <mat-error *ngIf="checkFieldRequired('email')">E-mail is required</mat-error>
+        <mat-error *ngIf="customerForm.get('email').hasError('emailInvalid') && customerForm.get('email').touched ">
+          E-mail has a invalid format
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="phone" placeholder="Phone">
+        <mat-error *ngIf="checkFieldRequired('phone')">Phone is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput formControlName="address" placeholder="Address">
+        <mat-error *ngIf="checkFieldRequired('address')">Address is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput formControlName="city" placeholder="City">
+        <mat-error *ngIf="checkFieldRequired('city')">City is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="state" placeholder="State">
+        <mat-error *ngIf="checkFieldRequired('state')">State is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="zipcode" placeholder="ZipCode">
+        <mat-error *ngIf="checkFieldRequired('zipcode')">Zipcode is required</mat-error>
+      </mat-form-field>
+
+    </div>
+
+  </form>
+
 
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="closeDialog()">Cancel</button>
-  <button mat-button (click)="saveCustomer()">{{actionButton()}}</button>
+  <button mat-button (click)="saveCustomer(customerForm.value)" [disabled]="customerForm.invalid">{{actionButton()}}</button>
 </div>

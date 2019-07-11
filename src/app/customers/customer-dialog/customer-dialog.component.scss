@@ -1,0 +1,14 @@
+.customer-form{
+  display: flex;
+  flex-direction: column;
+
+  .form-group{
+    display: flex;
+
+    &>.mat-form-field{
+      flex-grow: 1;
+      margin: 0 10px;
+    }
+  }
+
+}
