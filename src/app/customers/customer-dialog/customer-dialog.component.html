@@ -20,8 +20,9 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="phone" placeholder="Phone">
+        <input matInput formControlName="phone" prefix="+1" mask="(000) 000-0000" placeholder="Phone">
         <mat-error *ngIf="checkFieldRequired('phone')">Phone is required</mat-error>
+        <mat-error *ngIf="customerForm.get('phone').hasError('Mask error') && customerForm.get('phone').touched ">Phone is invalid</mat-error>
       </mat-form-field>
     </div>
     <div class="form-group">
@@ -44,9 +45,7 @@
       <mat-form-field>
         <input matInput formControlName="zipcode" placeholder="ZipCode" [mask]="mask(customerForm.get('zipcode').value)">
         <mat-error *ngIf="checkFieldRequired('zipcode')">Zipcode is required</mat-error>
-        <mat-error *ngIf="customerForm.get('zipcode').hasError('Mask error') && customerForm.get('zipcode').touched ">
-          Zipcode is invalid
-        </mat-error>
+        <mat-error *ngIf="customerForm.get('zipcode').hasError('Mask error') && customerForm.get('zipcode').touched ">Zipcode is invalid</mat-error>
       </mat-form-field>
 
     </div>
